@@ -1,0 +1,68 @@
+.container {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 360px;
+    height: 640px;
+    background: #343434
+}
+
+.mainText {
+    position: absolute;
+    left: 30px;
+    top: 100px;
+    width: 300px;
+    height: 100px;
+    color: #ffffff;
+    font-family: Inter;
+    font-size: 36px;
+    font-weight: 400;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.inputTwoFA {
+    position: absolute;
+    left: 30px;
+    top: 260px;
+    width: 150px;
+    height: 20px;
+    color: #ffffff;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.inputTwoFABox {
+    position: absolute;
+    left: 30px;
+    top: 280px;
+    width: 300px;
+    height: 40px;
+}
+
+.inputTwoFABox::placeholder {
+    position: absolute;
+    left: 14.68px;
+    top: 10px;
+    width: 282.5px;
+    height: 20px;
+    color: #81858b;
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.3px;
+}
+
+.loginButton {
+    position: absolute;
+    left: 126px;
+    top: 400px;
+    width: 107px;
+    height: 40px;
+}

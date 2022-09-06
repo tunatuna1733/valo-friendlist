@@ -1,0 +1,103 @@
+.container {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 360px;
+    height: 640px;
+    background: #343434
+}
+
+.mainText {
+    position: absolute;
+    left: 30px;
+    top: 90px;
+    width: 300px;
+    height: 120px;
+    color: #ffffff;
+    font-family: Inter;
+    font-size: 36px;
+    font-weight: 400;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.loginButton {
+    position: absolute;
+    left: 130px;
+    top: 500px;
+    width: 100px;
+    height: 40px;
+}
+
+.inputID {
+    position: absolute;
+    left: 30px;
+    top: 280px;
+    width: 100px;
+    height: 20px;
+    color: #ffffff;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+}   /* Text */
+
+.inputIDBox {
+    position: absolute;
+    left: 30px;
+    top: 300px;
+    width: 300px;
+    height: 40px;
+}
+
+.inputIDBox::placeholder {
+    position: absolute;
+    left: 14.68px;
+    top: 10px;
+    width: 282.5px;
+    height: 20px;
+    color: #81858b;
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.3px;
+}
+
+.inputPass {
+    position: absolute;
+    left: 30px;
+    top: 380px;
+    width: 100px;
+    height: 20px;
+    color: #ffffff;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+}   /* Text */
+
+.inputPassBox {
+    position: absolute;
+    left: 30px;
+    top: 400px;
+    width: 300px;
+    height: 40px;
+}
+
+.inputPassBox::placeholder {
+    position: absolute;
+    left: 14.68px;
+    top: 10px;
+    width: 282.5px;
+    height: 20px;
+    color: #81858b;
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.3px;
+}

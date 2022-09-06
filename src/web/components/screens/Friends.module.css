@@ -1,0 +1,41 @@
+.container {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 360px;
+    height: 640px;
+    background: #343434
+}
+
+.header {
+    height: 120px;
+}
+
+.mainText {
+    position: absolute;
+    left: 30px;
+    top: 26px;
+    width: 300px;
+    height: 70px;
+    color: #ffffff;
+    font-family: Inter;
+    font-size: 36px;
+    font-weight: 400;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.line {
+    position: absolute;
+    left: 0px;
+    top: 119px;
+    width: 360px;
+    height: 2px;
+    border: 1px solid #808080;
+}
+
+.presences {
+    position: relative;
+    top: 120px;
+}

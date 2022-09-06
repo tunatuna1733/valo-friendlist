@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+.material-icons-outlined.md-24 {
+    color: rgb(255,255,255);
+}
+
+.presence {
+    position: relative;
+    width: 350px;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.84) 54.94%);
+    background-blend-mode: normal;
+}
+
+.rankIcon {
+    position: absolute;
+    left: 15px;
+    top: 18px;
+    width: 64px;
+    height: 64px;
+    background-blend-mode: normal;
+}
+
+.riotID {
+    position: absolute;
+    left: 97px;
+    top: 18px;
+    width: 150px;
+    height: 21px;
+    color: #ffffff;
+    font-family: Inter;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.tag {
+    position: absolute;
+    left: 257px;
+    top: 21px;
+    width: 70px;
+    height: 15px;
+    color: #ffffff;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.line {
+    position: absolute;
+    left: 97px;
+    top: 38px;
+    width: 230px;
+    height: 2px;
+    border: 1px solid #808080;
+}
+
+.partyIcon {
+    position: absolute;
+    left: 299px;
+    top: 64px;
+    width: 24px;
+    height: 24px;
+    background: #d3d3d3;
+    background-blend-mode: normal;
+}
+
+.state {
+    position: absolute;
+    left: 97px;
+    top: 50px;
+    width: 145px;
+    height: 30px;
+    color: #ffffff;
+    font-family: Inter;
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
