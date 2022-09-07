@@ -50,7 +50,6 @@
     left: 97px;
     top: 38px;
     width: 230px;
-    height: 2px;
     border: 1px solid #808080;
 }
 
@@ -60,8 +59,8 @@
     top: 64px;
     width: 24px;
     height: 24px;
-    background: #d3d3d3;
     background-blend-mode: normal;
+    color: rgb(255, 255, 255);
 }
 
 .state {

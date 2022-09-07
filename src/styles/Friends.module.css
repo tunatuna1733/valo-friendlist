@@ -4,7 +4,12 @@
     top: 0px;
     width: 360px;
     height: 640px;
-    background: #343434
+    background: #343434;
+    overflow: scroll;
+}
+
+.container::-webkit-scrollbar {
+    display: none;
 }
 
 .header {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import TwoFAModule from "./TwoFA.module.css";
+import TwoFAModule from "../../../styles/TwoFA.module.css";
 
 const { myAPI } = window;
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-import ErrorModule from './Error.module.css';
+import ErrorModule from '../../../styles/Error.module.css';
 
 const { myAPI } = window;
 

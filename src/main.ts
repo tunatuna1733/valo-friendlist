@@ -62,11 +62,9 @@ app.whenReady().then(() => {
                     }
                 }
                 const res = await puuidToName(puuid);
-                console.log(res);
                 const name = res.data[0].GameName;
                 const tag = res.data[0].TagLine;
                 const state = game.presence.sessionLoopState;
-                let memoPartyId;
                 if (state === 'INGAME') {
                     if (game.presence.provisioningFlow !== 'ShootingRange') {
                         const map = convertMap(game.presence.matchMap);
@@ -74,7 +72,6 @@ app.whenReady().then(() => {
                         let mode = convertMode(game.presence.queueId);
                         if (game.presence.provisioningFlow === 'CustomGame') mode = 'Custom';
                         const partyId = game.presence.partyId;
-                        memoPartyId = partyId;
                         const rankNum = game.presence.competitiveTier;
                         let copydata = {};
                         presenceData = {
@@ -95,7 +92,6 @@ app.whenReady().then(() => {
                         const score = '';
                         const mode = ''
                         const partyId = game.presence.partyId;
-                        memoPartyId = partyId;
                         const rankNum = game.presence.competitiveTier;
                         let copydata = {};
                         presenceData = {
@@ -114,7 +110,6 @@ app.whenReady().then(() => {
                     }
                 } else if (state === 'MENUS') {
                     const partyId = game.presence.partyId;
-                    memoPartyId = partyId;
                     const rankNum = game.presence.competitiveTier;
                     let copydata = {}
                     if (game.presence.isIdle === false) {
@@ -144,7 +139,6 @@ app.whenReady().then(() => {
                     }
                 } else if (state === 'PREGAME') {
                     const partyId = game.presence.partyId;
-                    memoPartyId = partyId;
                     const rankNum = game.presence.competitiveTier;
                     const map = convertMap(game.presence.matchMap);
                     let mode = convertMode(game.presence.queueId);
@@ -163,14 +157,16 @@ app.whenReady().then(() => {
                     };
                     rawPresences.push(Object.assign(copydata, presenceData));
                 }
-                partyIds.push(memoPartyId);
             }
         }
 
-        const getDuplicateValues = (array: any[]) => {
-            return array.filter((value, index, self) => self.indexOf(value) === index && self.lastIndexOf(value) !== index);
+        for (const presence of rawPresences) {
+            partyIds.push(presence.partyId);
         }
-        const dupePartyIds = getDuplicateValues(partyIds);
+        const dupePartyIds = partyIds.filter(function (val, i, array) {
+            return !(array.indexOf(val) === i);
+        });
+
         let partyNum = 1;
         for (const dupePartyId of dupePartyIds) {
             for (const presence of rawPresences) {
@@ -182,6 +178,12 @@ app.whenReady().then(() => {
         }
 
         rawPresences = Array.from(new Map(rawPresences.map((rawPresence) => [rawPresence.puuid, rawPresence])).values());
+
+        rawPresences = rawPresences.sort((a, b) => {
+            if (a.partyId < b.partyId) return -1;
+            else if (a.partyId > b.partyId) return 1;
+            else return 0;
+        });
 
         const data = {
             presences: rawPresences
@@ -232,5 +234,7 @@ app.whenReady().then(() => {
     });
 });
 
-app.once('window-all-closed', () => app.quit());
+app.once('window-all-closed', () => {
+    app.quit()
+});
 

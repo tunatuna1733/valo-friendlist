@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+.material-icons-outlined.md-24 {
+    color: rgb(255,255,255);
+}
+
+.presence {
+    position: relative;
+    width: 350px;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.84) 54.94%);
+    background-blend-mode: normal;
+    z-index: 20;
+}
+
+.mapImage {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 350px;
+    height: 100px;
+    object-fit: cover;
+    z-index: 10;
+}
+
+.gradientBox {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 350px;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.84) 54.94%);
+    background-blend-mode: normal;
+    z-index: 20;
+}
+
+.rankIcon {
+    position: absolute;
+    left: 15px;
+    top: 18px;
+    width: 64px;
+    height: 64px;
+    background-blend-mode: normal;
+    z-index: 30;
+}
+
+.riotID {
+    position: absolute;
+    left: 97px;
+    top: 18px;
+    width: 150px;
+    height: 21px;
+    color: #ffffff;
+    font-family: Inter;
+    font-size: 18px;
+    font-weight: 400;
+    z-index: 30;
+}
+
+.tag {
+    position: absolute;
+    left: 257px;
+    top: 21px;
+    width: 70px;
+    height: 15px;
+    color: #ffffff;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    z-index: 30;
+}
+
+.modeText {
+    position: absolute;
+    left: 97px;
+    top: 42px;
+    width: 150px;
+    height: 16px;
+    color: #ffffff;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    z-index: 30;
+}
+
+.line {
+    position: absolute;
+    left: 97px;
+    top: 38px;
+    width: 230px;
+    border: 1px solid #808080;
+    z-index: 30;
+}
+
+.mapName {
+    position: absolute;
+    left: 97px;
+    top: 64px;
+    width: 90px;
+    height: 16px;
+    color: #ffffff;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    z-index: 30;
+}
+
+.partyIcon {
+    position: absolute;
+    left: 299px;
+    top: 64px;
+    width: 24px;
+    height: 24px;
+    background-blend-mode: normal;
+    color: rgb(255, 255, 255);
+    z-index: 30;
+}

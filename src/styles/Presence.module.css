@@ -10,6 +10,28 @@
     height: 100px;
     background: linear-gradient(135deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.84) 54.94%);
     background-blend-mode: normal;
+    z-index: 20;
+}
+
+.mapImage {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 350px;
+    height: 100px;
+    object-fit: cover;
+    z-index: 10;
+}
+
+.gradientBox {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 350px;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.84) 54.94%);
+    background-blend-mode: normal;
+    z-index: 20;
 }
 
 .rankIcon {
@@ -19,6 +41,7 @@
     width: 64px;
     height: 64px;
     background-blend-mode: normal;
+    z-index: 30;
 }
 
 .riotID {
@@ -31,6 +54,7 @@
     font-family: Inter;
     font-size: 18px;
     font-weight: 400;
+    z-index: 30;
 }
 
 .tag {
@@ -43,6 +67,7 @@
     font-family: Inter;
     font-size: 12px;
     font-weight: 400;
+    z-index: 30;
 }
 
 .modeText {
@@ -57,6 +82,7 @@
     font-weight: 400;
     display: flex;
     align-items: center;
+    z-index: 30;
 }
 
 .line {
@@ -64,8 +90,8 @@
     left: 97px;
     top: 38px;
     width: 230px;
-    height: 2px;
     border: 1px solid #808080;
+    z-index: 30;
 }
 
 .mapName {
@@ -80,6 +106,7 @@
     font-weight: 400;
     display: flex;
     align-items: center;
+    z-index: 30;
 }
 
 .score {
@@ -94,6 +121,7 @@
     font-weight: 400;
     display: flex;
     align-items: center;
+    z-index: 30;
 }
 
 .partyIcon {
@@ -102,6 +130,6 @@
     top: 64px;
     width: 24px;
     height: 24px;
-    background: #d3d3d3;
     background-blend-mode: normal;
+    color: rgb(255, 255, 255);
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import IDPassModule from './IDPass.module.css';
+import IDPassModule from '../../../styles/IDPass.module.css';
 
 const { myAPI } = window;
 

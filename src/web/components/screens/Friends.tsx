@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { isGameRes, isLobbyRes, isPregameRes } from "../../../shared/typeguard";
 
-import FriendsModule from './Friends.module.css';
+import FriendsModule from '../../../styles/Friends.module.css';
 import LobbyPresence from "./LobbyPresence";
+import PregamePresence from "./PregamePresence";
 import Presence from "./Presence";
 
 const { myAPI } = window;
@@ -74,11 +75,13 @@ const Friends: React.FC = () => {
                 {typeof presenceList !== 'undefined' ? 
                     presenceList.map((presence, i) => {
                         if (isGameRes(presence)) {
-                            console.log('InGame');
                             return (
                                 <Presence state={presence.state} puuid={presence.puuid} rankNum={presence.rankNum} riotID={presence.riotID} tag={presence.tag} mode={presence.mode} map={presence.map} score={presence.score} partyIconNum={presence.partyIconNum} key={i} />
                             );
                         } else if (isPregameRes(presence)) {
+                            return (
+                                <PregamePresence state={presence.state} puuid={presence.puuid} rankNum={presence.rankNum} riotID={presence.riotID} tag={presence.tag} mode={presence.mode} map={presence.map} partyIconNum={presence.partyIconNum} key={i} />
+                            )
                         } else if (isLobbyRes(presence)) {
                             return (
                                 <LobbyPresence state={presence.state} puuid={presence.puuid} rankNum={presence.rankNum} riotID={presence.riotID} tag={presence.tag} isAFK={presence.isAFK} partyIconNum={presence.partyIconNum} key={i} />

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { rankUrl, partyIcons } from "../../../shared/assets";
-import LobbyPresenceModule from './LobbyPresence.module.css';
+import LobbyPresenceModule from '../../../styles/LobbyPresence.module.css';
 
 const LobbyPresence: React.FC<LobbyRes> = (props) => {
     const rankIconUrl = rankUrl(props.rankNum);
@@ -16,7 +16,7 @@ const LobbyPresence: React.FC<LobbyRes> = (props) => {
                 <div className={LobbyPresenceModule.state}>{`In Lobby(Active)`}</div>
             }
             <div className={LobbyPresenceModule.partyIcon}>
-                <span className="material-icons-outlined md-24">{partyIconName}</span>
+                <span className="material-icons md-24">{partyIconName}</span>
             </div>
         </div>
     );
