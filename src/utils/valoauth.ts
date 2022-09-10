@@ -3,15 +3,15 @@ const axios = require('axios').default;
 
 export class ValoAuth {
     constructor (){}
-    private username = new String();
-    private password = new String();
+    private username: string;
+    private password: string;
     private session: any;
     private tokens: any = new Object();
     private headers: any = new Object();
-    private ssidCookie = new String();
-    private asidCookie = new String();
-    private clientVersion = new String();
-    private region = new String();
+    private ssidCookie: string;
+    private asidCookie: string;
+    private clientVersion: string;
+    private region: string;
 
     private ciphers = [
         'TLS_CHACHA20_POLY1305_SHA256',
@@ -50,7 +50,7 @@ export class ValoAuth {
         }
     }
 
-    private createSession = (ssidCookie?: String) => axios({
+    private createSession = (ssidCookie?: string) => axios({
         url: 'https://auth.riotgames.com/api/v1/authorization',
         method: 'POST',
         headers: {
@@ -72,7 +72,7 @@ export class ValoAuth {
         httpsAgent: this.agent
     });
 
-    private login = (cookie: String, username: String, password: String) => axios({
+    private login = (cookie: string, username: string, password: string) => axios({
         url: 'https://auth.riotgames.com/api/v1/authorization',
         method: 'PUT',
         headers: {
@@ -87,7 +87,7 @@ export class ValoAuth {
         httpsAgent: this.agent
     });
 
-    private send2faCode = (cookie: String, code: string, rememberDevice = true) => axios({
+    private send2faCode = (cookie: string, code: string, rememberDevice = true) => axios({
         url: 'https://auth.riotgames.com/api/v1/authorization',
         method: 'PUT',
         headers: {
@@ -214,7 +214,8 @@ export class ValoAuth {
             return {
                 success: true,
                 twofa: false,
-                debuginfo: response
+                debuginfo: response,
+                ssid: this.ssidCookie,
             };
         } else if (loginResponse.data.type === 'multifactor') {
             return {
@@ -287,7 +288,31 @@ export class ValoAuth {
         this.makeHeaders();
 
         return {
-            success: true
+            success: true,
+            ssid: this.ssidCookie
         };
+    }
+
+    public reauth = async (ssidCookie: string): Promise<ValoAuthRes> => {
+        console.log(ssidCookie);
+        return this.createSession(ssidCookie).then((response: any) => {
+            this.ssidCookie = response.headers['set-cookie'].find((elem: string) => /^ssid/.test(elem));
+            this.tokens = { ...this.tokens, ...this.parseUrl(response.data.response.parameters.uri) };
+            this.makeHeaders();
+            return {
+                success: true,
+                ssid: this.ssidCookie
+            };
+        });
+        /*
+        const response = await this.createSession(ssidCookie);
+        this.ssidCookie = response.headers['set-cookie'].find((elem: string) => /^ssid/.test(elem));
+        this.tokens = { ...this.tokens, ...this.parseUrl(response.data.response.parameters.uri) };
+        this.makeHeaders();
+        return {
+            success: true,
+            ssid: this.ssidCookie
+        };
+        */
     }
 }

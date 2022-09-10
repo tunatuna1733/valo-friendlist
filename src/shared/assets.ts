@@ -18,6 +18,15 @@ export const mapUrl = (mapName: string): string => {
     return '';
 }
 
+export const frameUrl = (frameuuid: string): string => {
+    if (frameuuid === '') return 'https://media.valorant-api.com/levelborders/ebc736cd-4b6a-137b-e2b0-1486e31312c9/smallplayercardappearance.png';
+    else return `https://media.valorant-api.com/levelborders/${frameuuid}/smallplayercardappearance.png`;
+}
+
+export const cardUrl = (carduuid: string): string => {
+    return `https://media.valorant-api.com/playercards/${carduuid}/displayicon.png`;
+}
+
 export const partyIcons = (partyIconNum: number): string => {
     const list = ['', 'circle', 'square', 'change_history', 'star_outline', 'favorite_border', 'dark_mode', 'pentagon', 'hexagon'];
     return list[partyIconNum];

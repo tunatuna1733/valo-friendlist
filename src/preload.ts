@@ -10,5 +10,6 @@ contextBridge.exposeInMainWorld('myAPI', {
     relaunch: async (): Promise<void> => ipcRenderer.invoke(IPCChannelType.Relaunch),
     startXmppClient: async (): Promise<string> => ipcRenderer.invoke(IPCChannelType.StartXmppClient),
     endXmppClient: async (): Promise<void> => ipcRenderer.invoke(IPCChannelType.EndXmppClient),
+    reauth: async (): Promise<string> => ipcRenderer.invoke(IPCChannelType.Reauth),
     debugEndpoint: async (): Promise<any> => ipcRenderer.invoke(IPCChannelType.DebugEndpoint),
 });

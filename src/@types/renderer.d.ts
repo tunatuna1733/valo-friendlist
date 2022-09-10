@@ -5,6 +5,7 @@ export interface IMyAPI {
     startXmppClient: () => Promise<string>,
     endXmppClient: () => Promise<void>,
     sendPresences: (listener: (presence: PresenceRes) => void) => void,
+    reauth: () => Promise<string>,
     debugEndpoint: () => any,
 }
 

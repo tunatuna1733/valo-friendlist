@@ -4,6 +4,7 @@ declare type ValoAuthRes = {
     debuginfo?: any;
     error?: string;
     detail?: any;
+    ssid?: string;
 }
 
 declare type GameRes = {
@@ -15,7 +16,10 @@ declare type GameRes = {
     mode: string;
     map: string;
     score: string;
+    frame: string;
+    card: string;
     partyIconNum: number;
+    lastModified: number;
 }
 
 declare type LobbyRes = {
@@ -25,7 +29,10 @@ declare type LobbyRes = {
     riotID: string;
     tag: string;
     isAFK: boolean;
+    frame: string;
+    card: string;
     partyIconNum: number;
+    lastModified: number;
 }
 
 declare type PregameRes = {
@@ -36,7 +43,10 @@ declare type PregameRes = {
     tag: string;
     mode: string;
     map: string;
+    frame: string;
+    card: string;
     partyIconNum: number;
+    lastModified: number;
 }
 
 declare type PresenceRes = {

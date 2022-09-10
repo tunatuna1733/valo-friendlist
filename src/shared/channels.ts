@@ -6,4 +6,5 @@ export enum IPCChannelType {
     StartXmppClient = 'start-xmpp-client',
     EndXmppClient = 'end-xmpp-client',
     DebugEndpoint = 'debug-endpoint',
+    Reauth = 'reauth',
 }
