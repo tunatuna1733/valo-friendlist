@@ -72,6 +72,7 @@ declare type ModalOptions = {
     tag: string;
     puuid: string;
     rankNum: number;
+    cardId: string;
 }
 
 declare module '*.css' {

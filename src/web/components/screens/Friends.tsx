@@ -12,7 +12,7 @@ const { myAPI } = window;
 const Friends: React.FC = () => {
     const [presenceList, setPresenceList] = useState<(GameRes | LobbyRes | PregameRes)[]>();
     const [isLoaded, setIsLoaded] = useState(false);
-    const [isModalOpen, setModalOpen] = useState<ModalOptions>({ isOpen: false, riotID: '', tag: '', puuid: '', rankNum: -1 });
+    const [isModalOpen, setModalOpen] = useState<ModalOptions>({ isOpen: false, riotID: '', tag: '', puuid: '', rankNum: -1, cardId: '' });
     useEffect(() => {
         myAPI.sendPresences((presence) => {
             if (!isLoaded && presence.presences !== undefined) setIsLoaded(true);
@@ -37,7 +37,7 @@ const Friends: React.FC = () => {
     }, []);
 
     const handleModalClose = () => {
-        setModalOpen({ isOpen: false, riotID: '', tag: '', puuid: '', rankNum: -1 });
+        setModalOpen({ isOpen: false, riotID: '', tag: '', puuid: '', rankNum: -1, cardId: '' });
     }
 
     useEffect(() => {
@@ -71,7 +71,7 @@ const Friends: React.FC = () => {
                         }) : <h1>Loading...</h1>
                     }
                     {isModalOpen.isOpen === true ?
-                        <CareerModal riotID={isModalOpen.riotID} tag={isModalOpen.tag} puuid={isModalOpen.puuid} rankNum={isModalOpen.rankNum} handleModal={handleModalClose} />
+                        <CareerModal riotID={isModalOpen.riotID} tag={isModalOpen.tag} puuid={isModalOpen.puuid} rankNum={isModalOpen.rankNum} cardId={isModalOpen.cardId} handleModal={handleModalClose} />
                         : <div></div>}
                 </div>
             </div>

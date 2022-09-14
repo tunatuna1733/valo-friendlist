@@ -22,7 +22,7 @@ const LobbyPresence: React.FC<LobbyRes> = (props) => {
             <div className={LobbyPresenceModule.partyIcon}>
                 <span className="material-icons md-24">{partyIconName}</span>
             </div>
-            <button className={LobbyPresenceModule.button} onClick={() => props.onClick({isOpen: true, riotID: props.riotID, tag: props.tag, puuid: props.puuid, rankNum: props.rankNum})}></button>
+            <button className={LobbyPresenceModule.button} onClick={() => props.onClick({isOpen: true, riotID: props.riotID, tag: props.tag, puuid: props.puuid, rankNum: props.rankNum, cardId: props.card})}></button>
         </div>
     );
 }

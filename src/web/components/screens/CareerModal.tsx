@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { rankUrl } from "../../../shared/assets";
+import { cardUrl, frameUrl, rankUrl } from "../../../shared/assets";
 
 import CareerModalModule from '../../../styles/CareerModal.module.css';
 import Match from "./Match";
@@ -11,6 +11,7 @@ type Props = {
     tag: string;
     puuid: string;
     rankNum: number;
+    cardId: string;
     handleModal: () => void;
 }
 
@@ -29,15 +30,19 @@ const CareerModal: React.FC<Props> = (props) => {
     }, [matchList]);
 
     const rankIconUrl = rankUrl(props.rankNum);
+    const frameImageUrl = frameUrl('');
+    const cardImageUrl = cardUrl(props.cardId);
 
     return (
         <div className={CareerModalModule.container}>
             <button className={CareerModalModule.closeButton} onClick={props.handleModal}>✕</button>
+            <img src={frameImageUrl} alt="" className={CareerModalModule.cardFrame} />
+            <img src={cardImageUrl} alt="" className={CareerModalModule.playerCard} />
             <div className={CareerModalModule.riotID}>
                 {props.riotID}
             </div>
             <div className={CareerModalModule.tag}>
-                {props.tag}
+                {`#${props.tag}`}
             </div>
             <hr className={CareerModalModule.line} />
             <div className={CareerModalModule.currentRank}>Current Rank</div>

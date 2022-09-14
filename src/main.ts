@@ -228,7 +228,7 @@ app.whenReady().then(() => {
     });
 
     xmppClient.on('error', (error) => {
-        console.error(error);
+        console.error('error event!\n', error);
     });
 
     ipcMain.handle(IPCChannelType.SendIDPass, async (event, riotID, password) => {

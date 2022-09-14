@@ -1,7 +1,7 @@
 .container {
     position: absolute;
     left: 15px;
-    top: 15px;
+    top: -105px;
     width: 330px;
     height: 610px;
     border-radius: 20px;
@@ -24,6 +24,9 @@
     font-family: Inter;
     font-size: 18px;
     font-weight: 400;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .tag {
@@ -43,7 +46,7 @@
     left: 110px;
     top: 58px;
     width: 210px;
-    border: 1px dashed #808080;
+    border: 1px solid #808080;
 }
 
 .currentRank {
@@ -54,7 +57,7 @@
     height: 30px;
     color: #ffffff;
     font-family: Inter;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 400;
     text-align: center;
     display: flex;
@@ -63,11 +66,29 @@
 
 .rankIcon {
     position: absolute;
+    left: 260px;
+    top: 67px;
+    width: 35px;
+    height: 35px;
+    background-blend-mode: normal;
+}
+
+.cardFrame {
+    position: absolute;
     left: 20px;
     top: 20px;
     width: 80px;
     height: 80px;
-    background-blend-mode: normal;
+    z-index: 30;
+}
+
+.playerCard {
+    position: absolute;
+    left: 29px;
+    top: 28px;
+    width: 62px;
+    height: 62px;
+    z-index: 30;
 }
 
 .matches {
