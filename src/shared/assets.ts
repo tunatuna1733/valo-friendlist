@@ -27,6 +27,10 @@ export const cardUrl = (carduuid: string): string => {
     return `https://media.valorant-api.com/playercards/${carduuid}/displayicon.png`;
 }
 
+export const charaUrl = (charaId: string): string => {
+    return `https://media.valorant-api.com/agents/${charaId}/displayicon.png`;
+}
+
 export const partyIcons = (partyIconNum: number): string => {
     const list = ['', 'circle', 'square', 'change_history', 'star_outline', 'favorite_border', 'dark_mode', 'pentagon', 'hexagon'];
     return list[partyIconNum];

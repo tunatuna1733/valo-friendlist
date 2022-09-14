@@ -8,6 +8,7 @@ import { ValoAuth } from './utils/valoauth';
 import { Builders, ValorantXmppClient } from 'valorant-xmpp-client';
 import { puuidToName } from './utils/nameservice';
 import { convertMap, convertMode } from './shared/assets';
+import axios, { AxiosRequestConfig } from 'axios';
 
 dotenv.config();
 
@@ -61,7 +62,6 @@ app.whenReady().then(() => {
     let rawPresences: any[] = [];
     let presenceData = {};
     xmppClient.on('presence', async (presence) => {
-        // edit presence list and send to renderer
         let partyIds: any[] = [];
         const unix = Date.now();
         if (presence.sender.local === presence.recipient.local) return;
@@ -442,8 +442,11 @@ app.whenReady().then(() => {
             return ('Not ready');
         }
         if (typeof ssidCookie === 'string') {
-            console.log(ssidCookie);
+            console.log('in main', ssidCookie);
             return valoauth.reauth(ssidCookie).then(async (result) => {
+                if (result.success === false) {
+                    return ('Not ready');
+                }
                 store.set('ssid', result.ssid);
                 const accessToken = valoauth.getAccessToken();
                 console.log(accessToken);
@@ -456,6 +459,99 @@ app.whenReady().then(() => {
                 return ('ready');
             });
             
+        }
+    });
+
+    ipcMain.handle(IPCChannelType.FetchMatchHistory, async (event, puuid) => {
+        console.log('in main fetchhistory');
+        const accessToken = xmppClient.account.tokenStorage?.accessToken;
+        const entitlementsToken = xmppClient.account.tokenStorage?.entitlementsToken;
+        const clientVersion = valoauth.getClientVersion();
+        const clientPlatform = valoauth.getClientPlatform();
+        let region = valoauth.getRegion();
+        if (typeof region === 'undefined') region = 'ap';
+        const url = `https://pd.${region}.a.pvp.net/match-history/v1/history/${puuid}?queue=competitive`;
+        const headers = {
+            Authorization: `Bearer ${accessToken}`,
+            'X-Riot-Entitlements-JWT': `${entitlementsToken}`,
+            'X-Riot-ClientVersion': clientVersion,
+            'X-Riot-ClientPlatform': `${Buffer.from(JSON.stringify(clientPlatform)).toString('base64')}`,
+        };
+        const requestConfig: AxiosRequestConfig = {
+            headers: headers
+        };
+        const matchList: MatchDetail[] = [];
+        const matchIdList: string[] = [];
+        if (typeof accessToken !== 'undefined' && typeof entitlementsToken !== 'undefined' && typeof clientVersion !== 'undefined' && typeof headers['X-Riot-ClientPlatform'] !== 'undefined') {
+            return new Promise((resolve, reject) => {
+                axios.get(url, requestConfig).then((response) => {
+                    let idIndex = 0;
+                    for (const match of response.data.History) {
+                        if (idIndex === 5) break;
+                        matchIdList.push(match.MatchID);
+                        idIndex++;
+                    }
+                    let matchIndex = 0;
+                    for (const matchId of matchIdList) {
+                        let detailurl = `https://pd.${region}.a.pvp.net/match-details/v1/matches/${matchId}`;
+                        axios.get(detailurl, requestConfig).then((response) => {
+                            const matchData = response.data;
+                            const map = convertMap(matchData.matchInfo.mapId);
+                            let charaid: string = '';
+                            let team: string = '';
+                            let score: string = '';
+                            let combatScore: number = 0;
+                            let kda: string = '';
+                            let maxCS = {
+                                All: 0,
+                                Red: 0,
+                                Blue: 0
+                            };
+                            let isWin: boolean = false;
+                            let isMatchMVP: boolean = false;
+                            let isTeamMVP: boolean = false;
+                            for (const player of matchData.players) {
+                                if (player.subject === puuid) {
+                                    team = player.teamId;
+                                    charaid = player.characterId;
+                                    combatScore = player.stats.score;
+                                    kda = player.stats.kills.toString() + '/' + player.stats.deaths.toString() + '/' + player.stats.assists.toString();
+                                }
+                                // max score through all players
+                                if (maxCS.All < player.stats.score) maxCS.All = player.stats.score;
+                                // max red
+                                if (player.teamId === 'Red' && maxCS.Red < player.stats.score) maxCS.Red = player.stats.score;
+                                // max blue
+                                if (player.teamId === 'Blue' && maxCS.Blue < player.stats.score) maxCS.Blue = player.stats.score;
+                            }
+                            if (combatScore === maxCS.All) isMatchMVP = true;
+                            else if (team === 'Red' && combatScore === maxCS.Red) isTeamMVP = true;
+                            else if (team === 'Blue' && combatScore === maxCS.Blue) isTeamMVP = true;
+                            for (const teamStats of matchData.teams) {
+                                if (teamStats.teamId === team) {
+                                    isWin = teamStats.won;
+                                    score = teamStats.roundsWon.toString() + ' - ' + (teamStats.roundsPlayed - teamStats.roundsWon).toString();
+                                }
+                            }
+                            const matchDetail: MatchDetail = {
+                                charaId: charaid,
+                                kda: kda,
+                                isMatchMVP: isMatchMVP,
+                                isTeamMVP: isTeamMVP,
+                                score: score,
+                                map: map,
+                                isWin: isWin
+                            };
+                            matchList.push(matchDetail);
+                            matchIndex++;
+                            if (matchIndex === 5) {
+                                console.log(matchList);
+                                resolve(matchList);
+                            }
+                        });
+                    }
+                });
+            });
         }
     });
 

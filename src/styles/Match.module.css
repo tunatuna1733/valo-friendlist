@@ -1,0 +1,139 @@
+.matchWin {
+    position: relative;
+    width: 330px;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(0,0,0,0.75) 47.53%, rgba(0,217,255,0) 100%);
+    background-blend-mode: normal;
+    z-index: 20;
+}
+
+.matchLose {
+    position: relative;
+    width: 330px;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(0,0,0,0.75) 47.53%, rgba(255,0,0,0.13) 100%);
+    background-blend-mode: normal;
+    z-index: 20;
+}
+
+.gradientBoxWin {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 330px;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(0,0,0,0.75) 47.53%, rgba(0,217,255,0) 100%);
+    background-blend-mode: normal;
+    z-index: 20;
+}
+
+.gradientBoxLose {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 330px;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(0,0,0,0.75) 47.53%, rgba(255,0,0,0.13) 100%);
+    background-blend-mode: normal;
+    z-index: 20;
+}
+
+.mapImage {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 330px;
+    height: 100px;
+    object-fit: cover;
+    z-index: 10;
+}
+
+.charaIcon {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100px;
+    height: 100px;
+    background-blend-mode: normal;
+    z-index: 30;
+}
+
+.mapName {
+    position: absolute;
+    left: 110px;
+    top: 64px;
+    width: 100px;
+    height: 16px;
+    color: #ffffff;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    z-index: 30;
+}
+
+.score {
+    position: absolute;
+    left: 230px;
+    top: 60px;
+    width: 70px;
+    height: 25px;
+    color: #ffffff;
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    z-index: 30;
+}
+
+.kda {
+    position: absolute;
+    left: 110px;
+    top: 10px;
+    width: 100px;
+    height: 30px;
+    color: #ffffff;
+    font-family: Inter;
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    z-index: 30;
+}
+
+.matchMVP {
+    position: absolute;
+    left: 230px;
+    top: 15px;
+    width: 70px;
+    height: 20px;
+    color: #ffe600;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    z-index: 30;
+}
+
+.teamMVP {
+    position: absolute;
+    left: 230px;
+    top: 15px;
+    width: 70px;
+    height: 20px;
+    color: #ffffff;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    z-index: 30;
+}

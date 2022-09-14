@@ -140,3 +140,18 @@
     height: 62px;
     z-index: 30;
 }
+
+.button {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 400px;
+    height: 100px;
+    background-color: #c7c7c7;
+    opacity: 0;
+    z-index: 40;
+}
+
+.button:hover {
+    opacity: 0.2;
+}

@@ -1,0 +1,91 @@
+.container {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    width: 330px;
+    height: 610px;
+    border-radius: 20px;
+    background: #616161;
+    background-blend-mode: normal;
+    z-index: 100;
+}
+
+.container::-webkit-scrollbar {
+    display: none;
+}
+
+.riotID {
+    position: absolute;
+    left: 110px;
+    top: 38px;
+    width: 150px;
+    height: 21px;
+    color: #ffffff;
+    font-family: Inter;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.tag {
+    position: absolute;
+    left: 260px;
+    top: 41px;
+    width: 60px;
+    height: 15px;
+    color: #ffffff;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.line {
+    position: absolute;
+    left: 110px;
+    top: 58px;
+    width: 210px;
+    border: 1px dashed #808080;
+}
+
+.currentRank {
+    position: absolute;
+    left: 150px;
+    top: 70px;
+    width: 100px;
+    height: 30px;
+    color: #ffffff;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.rankIcon {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    width: 80px;
+    height: 80px;
+    background-blend-mode: normal;
+}
+
+.matches {
+    position: relative;
+    top: 120px;
+}
+
+.closeButton {
+    position: absolute;
+    left: 290px;
+    top: 10px;
+    width: 21px;
+    height: 21px;
+    color: #ffffff;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}

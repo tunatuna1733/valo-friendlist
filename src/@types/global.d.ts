@@ -20,6 +20,7 @@ declare type GameRes = {
     card: string;
     partyIconNum: number;
     lastModified: number;
+    onClick: (options: ModalOptions) => void;
 }
 
 declare type LobbyRes = {
@@ -33,6 +34,7 @@ declare type LobbyRes = {
     card: string;
     partyIconNum: number;
     lastModified: number;
+    onClick: (options: ModalOptions) => void;
 }
 
 declare type PregameRes = {
@@ -47,10 +49,29 @@ declare type PregameRes = {
     card: string;
     partyIconNum: number;
     lastModified: number;
+    onClick: (options: ModalOptions) => void;
 }
 
 declare type PresenceRes = {
     presences: (GameRes | LobbyRes | PregameRes)[]
+}
+
+declare type MatchDetail = {
+    charaId: string;
+    kda: string;
+    isMatchMVP: boolean;
+    isTeamMVP: boolean;
+    score: string;
+    map: string;
+    isWin: boolean;
+}
+
+declare type ModalOptions = {
+    isOpen: boolean;
+    riotID: string;
+    tag: string;
+    puuid: string;
+    rankNum: number;
 }
 
 declare module '*.css' {

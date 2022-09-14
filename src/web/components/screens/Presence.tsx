@@ -26,6 +26,7 @@ const Presence: React.FC<GameRes> = (props) => {
                     <span className="material-icons md-24">{partyIconName}</span>
                 </div>
             </div>
+            <button className={PresenceModule.button} onClick={() => props.onClick({isOpen: true, riotID: props.riotID, tag: props.tag, puuid: props.puuid, rankNum: props.rankNum})}></button>
         </div>
     );
 }

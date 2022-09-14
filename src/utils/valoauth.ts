@@ -153,6 +153,18 @@ export class ValoAuth {
         return this.tokens.accessToken;
     }
 
+    public getClientVersion = () => {
+        return this.clientVersion;
+    }
+
+    public getClientPlatform = () => {
+        return this.clientPlatform;
+    }
+
+    public getRegion = () => {
+        return this.region;
+    }
+
     public step1 = async (): Promise<ValoAuthRes> => {
         this.session = await this.createSession();
         this.asidCookie = this.session.headers['set-cookie'].find((cookie: string) => /^asid/.test(cookie));
@@ -294,15 +306,30 @@ export class ValoAuth {
     }
 
     public reauth = async (ssidCookie: string): Promise<ValoAuthRes> => {
-        console.log(ssidCookie);
-        return this.createSession(ssidCookie).then((response: any) => {
-            this.ssidCookie = response.headers['set-cookie'].find((elem: string) => /^ssid/.test(elem));
-            this.tokens = { ...this.tokens, ...this.parseUrl(response.data.response.parameters.uri) };
-            this.makeHeaders();
-            return {
-                success: true,
-                ssid: this.ssidCookie
-            };
+        console.log('in valoauth', ssidCookie);
+        return this.createSession(ssidCookie).then(async (response: any) => {
+            try {
+                this.ssidCookie = response.headers['set-cookie'].find((elem: string) => /^ssid/.test(elem));
+                this.tokens = { ...this.tokens, ...this.parseUrl(response.data.response.parameters.uri) };
+                const pasTokenResponse = await this.fetchPas(this.tokens.accessToken, this.tokens.idToken);
+                this.tokens.pasToken = pasTokenResponse.data.token;
+        
+                this.region = pasTokenResponse.data.affinities.live;
+        
+                this.clientVersion = (await this.fetchValorantVersion()).data.data.riotClientVersion;
+                
+                this.makeHeaders();
+                this.makeHeaders();
+                return {
+                    success: true,
+                    ssid: this.ssidCookie
+                };
+            } catch (e) {
+                console.log('error in reauth', e);
+                return {
+                    success: false
+                }
+            }
         });
         /*
         const response = await this.createSession(ssidCookie);
