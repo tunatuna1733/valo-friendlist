@@ -2,7 +2,8 @@ import { Agent } from 'https';
 const axios = require('axios').default;
 
 export class ValoAuth {
-    constructor (){}
+    private useragent: string;
+    constructor() {}
     private username: string;
     private password: string;
     private session: any;
@@ -55,7 +56,7 @@ export class ValoAuth {
         method: 'POST',
         headers: {
             ...typeof ssidCookie === 'undefined' ? '' : { Cookie: ssidCookie },
-            'User-Agent': 'RiotClient/43.0.1.4195386.4190634 rso-auth (Windows; 10;;Professional, x64)'
+            'User-Agent': 'RiotClient/60.0.10.4802528.4749685 rso-auth (Windows;10;;Professional, x64)'
         },
         data: {
             client_id: "play-valorant-web-prod",
@@ -77,7 +78,7 @@ export class ValoAuth {
         method: 'PUT',
         headers: {
             Cookie: cookie,
-            'User-Agent': 'RiotClient/43.0.1.4195386.4190634 rso-auth (Windows; 10;;Professional, x64)'
+            'User-Agent': 'RiotClient/60.0.10.4802528.4749685 rso-auth (Windows; 10;;Professional, x64)'
         },
         data: {
             type: 'auth',
@@ -92,7 +93,7 @@ export class ValoAuth {
         method: 'PUT',
         headers: {
             Cookie: cookie,
-            'User-Agent': 'RiotClient/43.0.1.4195386.4190634 rso-auth (Windows; 10;;Professional, x64)'
+            'User-Agent': 'RiotClient/60.0.10.4802528.4749685 rso-auth (Windows; 10;;Professional, x64)'
         },
         data: {
             type: 'multifactor',
@@ -169,37 +170,51 @@ export class ValoAuth {
         this.session = await this.createSession();
         this.asidCookie = this.session.headers['set-cookie'].find((cookie: string) => /^asid/.test(cookie));
 
+        let result: ValoAuthRes = { success: false };
         const loginResponse = await this.login(this.asidCookie, this.username, this.password)
             .catch((err: any) => {
-                if (typeof err.response.data === 'undefined')
-                    return {
+                if (typeof err.response.data === 'undefined') {
+                    result = {
                         success: false,
                         error: 'unknown',
                         detail: err.response
                     };
-                if (err.response.data.error === 'rate_limited')
-                    return {
+                    //console.log(result);
+                    return result;
+                }
+                if (err.response.data.error === 'rate_limited') {
+                    result = {
                         success: false,
                         error: 'rate limited'
                     };
-                return {
+                    //console.log(result);
+                    return result;
+                }
+                result = {
                     success: false,
                     error: 'unknown',
                     detail: err.response.data
                 };
+                //console.log(result);
+                return result;
             });
         if(typeof loginResponse.data.error !== 'undefined') {
             console.dir(loginResponse.data)
-            if (loginResponse.data.error === 'auth_failure')
-                return {
+            if (loginResponse.data.error === 'auth_failure') {
+                result = {
                     success: false,
                     error: 'invalid credentials'
                 };
-            return {
+                //console.log(result);
+                return result;
+            }
+            result = {
                 success: false,
                 error: 'detail',
                 detail: loginResponse.data
             };
+            //console.log(result);
+            return result;
         }
 
         this.asidCookie = loginResponse.headers['set-cookie'].find((cookie: string) => /^asid/.test(cookie));
@@ -223,23 +238,30 @@ export class ValoAuth {
             
             this.makeHeaders();
 
-            return {
+            result = {
                 success: true,
                 twofa: false,
                 debuginfo: response,
                 ssid: this.ssidCookie,
             };
+            //console.log(result);
+            return result;
         } else if (loginResponse.data.type === 'multifactor') {
-            return {
+            result = {
                 success: true,
                 twofa: true,
                 debuginfo: loginResponse.data
             };
+            //console.log(result);
+            return result;
         }
 
-        return {
-            success: false
+        result = {
+            success: false,
+            error: 'unknown'
         }
+        console.log(result);
+        return result;
     }
 
     public step2 = async (code: string): Promise<ValoAuthRes> => {
@@ -306,7 +328,7 @@ export class ValoAuth {
     }
 
     public reauth = async (ssidCookie: string): Promise<ValoAuthRes> => {
-        console.log('in valoauth', ssidCookie);
+        //console.log('in valoauth', ssidCookie);
         return this.createSession(ssidCookie).then(async (response: any) => {
             try {
                 this.ssidCookie = response.headers['set-cookie'].find((elem: string) => /^ssid/.test(elem));

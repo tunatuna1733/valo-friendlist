@@ -442,7 +442,7 @@ app.whenReady().then(() => {
             return ('Not ready');
         }
         if (typeof ssidCookie === 'string') {
-            console.log('in main', ssidCookie);
+            //console.log('in main', ssidCookie);
             return valoauth.reauth(ssidCookie).then(async (result) => {
                 if (result.success === false) {
                     return ('Not ready');
