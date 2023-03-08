@@ -1,3 +1,5 @@
-This is the valorant friend list app made with Electron.
-Some features such as match list and store viewer is heavily WIP.
-Currently, we need to update User-Agent manually to bypass cloudflare 1020 error.
+# About
+
+You can view Valorant friend list without opening the client with this app.
+
+XMPP function of this app relies on an unstable third-party-api, so it sometimes stops running.
